@@ -1,0 +1,31 @@
+import glob
+from PIL import Image
+
+#Retriving all image names and it's path with .jpg extension from given directory path in imageNames list
+imageNames = glob.glob(r"E:\New folder\n1\*.jpg")
+#Change the extension if your folder has mixed image types and do for all extensions.
+
+#Defining width and height of image
+#Images in 'n' should be twice in size than that of images in 'p' for better results.
+new_width  = 800
+new_height = 800
+
+#Count variable to show the progress of image resized
+#set the count to last image no if you are resizing images from diff folder or with diff extension or images will be overwritten.
+count=0
+
+#Creating for loop to take one image from imageNames list and resize
+for i in imageNames:
+	#opening image for editing
+    try:
+    	img = Image.open(i)
+    	#using resize() to resize image
+    	img = img.resize((new_width, new_height), Image.ANTIALIAS)
+    	#save() to save image at given path and count is the name of image eg. first image name will be 0.jpg
+    	img.save(r"E:\New folder (4)\n\\"+str(count)+".jpg") 
+    	#incrementing count value
+    	count+=1
+    	#showing image resize progress
+    	print("Images Resized " +str(count)+"/"+str(len(imageNames)),end='\r')
+    except IOError:
+            print("cannot reduce image for ", i)
